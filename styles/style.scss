@@ -1,0 +1,163 @@
+$main-background: #130a4d;
+$main-font-color: lightyellow;
+
+html {
+    height: 100%;
+}
+
+body {
+    color: $main-font-color;
+
+    min-height: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#main-content {
+    background-color: $main-background;
+
+    box-sizing: border-box;
+    max-width: 44em;
+    min-height: 100%;
+    padding: 2em;
+    flex-grow: 100;
+
+    display: flex;
+    flex-flow: column;
+}
+
+%side-content {
+    flex-grow: 1;
+    flex-shrink: 100;
+    flex-basis: 0;
+
+    background: transparent;
+}
+#side-content-left, #side-content-right {
+    @extend %side-content
+}
+
+#main-menu {
+    font-size: 1.2em;
+    position: fixed;
+    margin-left: 10px;
+    border-spacing: 0 0.8em;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#main-menu li {
+    background-color: $main-background;
+
+    vertical-align: middle;
+    text-align: center;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+#main-menu a:visited {
+    color: $main-font-color;
+}
+
+#content-body {
+    flex-grow: 100;
+    flex-shrink: 1;
+    flex-basis: 100%;
+}
+
+.bottom {
+    width: 100%;
+    clear: both;
+    flex-grow: 0;
+    flex-shrink: 100;
+    flex-basis: 100%;
+    margin-top: 1em;
+    padding-bottom: 0.5em;
+}
+#footer {
+    border-top: 1px;
+    border-left: 0;
+    border-bottom: 0;
+    border-right: 0;
+    border-style: solid;
+
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.center {
+    text-align: center;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+a {
+    text-decoration-color: lightgray;
+    color: lightyellow;
+}
+a:visited {
+    color: orange;
+}
+
+#article {
+    counter-reset: figure;
+    counter-reset: reference;
+}
+
+#article .images-2cols {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-auto-rows: max-content;
+    grid-gap: 0.5em;
+    justify-items: center;
+    align-items: center;
+}
+#article .images-2cols > img {
+    width: 100%;
+}
+
+.prologue {
+    background-color: whitesmoke;
+    padding: 5%;
+}
+
+.figure > .caption {
+    font-size: 80%;
+}
+.figure > .caption::before {
+    counter-increment: figure;
+    content: "Fig."counter(figure)". ";
+}
+
+.ref {
+    vertical-align: top;
+    font-size: 70%;
+}
+.reference {
+    font-size: 90%;
+}
+.reference::before {
+    counter-increment: reference;
+    content: "["counter(reference)"] ";
+}
+
+@import 'sunset_sea';

@@ -1,0 +1,67 @@
+@mixin keyframe_animation($frames) {
+    @for $i from 1 through $frames {
+        .keyframe-animation-#{$frames} > :nth-child(#{$i}) {
+            animation-name: keyframe-#{$i}-#{$frames};
+        }
+        @keyframes keyframe-#{$i}-#{$frames} {
+            @if $i != 1 {
+                0% {
+                    visibility: hidden;
+                }
+            }
+            #{100/$frames*($i - 1)}% {
+                visibility: hidden;
+            }
+            #{100/$frames*$i - 100/$frames/2}% {
+                visibility: visible;
+            }
+            #{100/$frames*$i}% {
+                visibility: hidden;
+            }
+            @if $i != $frames {
+                100% {
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}
+@mixin keyframe_animation_with_delay($frames, $delay) {
+    @for $i from 1 through $frames {
+        .keyframe-animation-#{$frames}-#{$delay} > :nth-child(#{$i}) {
+            animation-name: keyframe-delayed-#{$i}-#{$frames};
+        }
+        $total: $frames + $delay;
+        $base: 100/$total*$delay;
+        @keyframes keyframe-delayed-#{$i}-#{$frames} {
+            0% {
+                visibility: hidden;
+            }
+            #{$base}% {
+                visibility: hidden;
+            }
+            @if $i != 1 {
+                #{$base}% {
+                    visibility: hidden;
+                }
+            }
+            #{$base + (100 - $base)/$total*($i - 1)}% {
+                visibility: hidden;
+            }
+            #{$base + (100 - $base)/$total*$i - (100 - $base)/$total/2}% {
+                visibility: visible;
+            }
+            #{$base + (100 - $base)/$total*$i}% {
+                visibility: hidden;
+            }
+            @if $i != $total {
+                100% {
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}
+
+@include keyframe_animation(4);
+@include keyframe_animation_with_delay(13, 26);
